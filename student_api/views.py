@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.generics import GenericAPIView, mixins, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.viewsets import ModelViewSet
 
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 
 
@@ -275,7 +275,7 @@ class StudentMVS(ModelViewSet):
     filter_backends=[DjangoFilterBackend,SearchFilter,OrderingFilter]
     filterset_fields=['id','first_name','last_name']
     search_fields=['first_name','last_name']
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAdminUser]
 
     @action(detail=False, methods=["GET"])
     def student_count(self, request):
